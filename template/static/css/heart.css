@@ -1,0 +1,45 @@
+:root {
+  --big-heart: scale(1) rotate(45deg);
+  --small-heart: scale(0.6) rotate(45deg);
+}
+@keyframes beat {
+  0%  { transform: var(--big-heart); }
+  10% { transform: var(--small-heart); }
+  20% { transform: var(--big-heart); }
+  80% { transform: var(--big-heart); }
+  90% { transform: var(--small-heart); }
+}
+@keyframes color {
+  0%  { background-color: indianred; }
+  10% { background-color: red }
+  20% { background-color: indianred; }
+  80% { background-color: indianred; }
+  90% { background-color: red }
+}
+
+.heart {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top: 100px;
+  transform: rotate(45deg);
+  animation: beat 1s infinite;
+}
+.left {
+  left: 150px;
+}
+.right {
+  right: 150px;
+}
+.core, .before, .after {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-color: indianred;
+  animation: color 1s infinite;
+}
+.before, .after {
+  border-radius: 50%;
+}
+.before { top: -25px; }
+.after { left: -25px; }

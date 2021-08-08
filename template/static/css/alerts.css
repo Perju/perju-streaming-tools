@@ -1,0 +1,11 @@
+body {
+  background-image: none;
+  overflow: hidden;
+}
+h1 {
+  font-size: 48px;
+}
+#content {
+  position: absolute;
+  width: 100%;
+}

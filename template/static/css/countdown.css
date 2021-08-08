@@ -1,0 +1,40 @@
+p {
+  margin: 10px 0px;
+}
+h1 {
+  font-size: 48px;
+}
+h1, h2, hr {
+  position: relative;
+  margin: 0;
+}
+
+#content {
+  position: relative;
+  width: 50%;
+  top: 10px;
+}
+#content div {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  flex-flow: column;
+  background-color: black;
+}
+h1, .timer, #content {
+  color: var(--txt-light);
+}
+.timer {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+}
+.message hr{
+  width: 100%;
+}

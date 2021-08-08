@@ -1,0 +1,77 @@
+{
+  "name": "Name of the corpus",
+  "locale": "es-ES",
+  "data": [
+    {
+      "intent": "saludos.adios",
+      "utterances": [
+        "hasta luego",
+        "que te vaya bien",
+        "nos vemos",
+        "hasta la próxima",
+        "tengo que irme"
+      ],
+      "answers": [
+        {
+          "answer": ["Hasta la próxima", "¡Nos vemos pronto!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["hasta la próxima {{nombre}}!"],
+          "opts": "relacion==='buena'"
+        },
+        { "answer": ["Ya estas tardando"], "opts": "relacion==='mala'" }
+      ]
+    },
+    {
+      "intent": "saludos.hola",
+      "utterances": ["hola", "Un saludo", "ey"],
+      "answers": [
+        {
+          "answer": ["¡Que pasa!", "¡Saludos!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["Hola pesadico", "Otra vez no :("],
+          "opts": "relacion==='mala'"
+        },
+        {
+          "answer": ["¡Hola {{nombre}}!", "¡Que pasa {{nombre}}!"],
+          "opts": "relacion==='buena'"
+        }
+      ]
+    },
+    {
+      "intent": "saludos.comoestas",
+      "utterances": [
+        "¿Qué tal?",
+        "¿Cómo te va el día?",
+        "¿Cómo estas?",
+        "¿Estas bien?"
+      ],
+      "answers": [
+        {
+          "answer": [
+            "Tengo un buen día, gracias",
+            "Hoy me siento bien"
+          ],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": [
+            "¡Tengo un día maravilloso!",
+            "¡Genial! Gracias por preguntar"
+          ],
+          "opts": "relacion==='buena'"
+        },
+        {
+          "answer": [
+            "Bien hasta que has llegado",
+            "Ahora ya no es tan bueno"
+          ],
+          "opts": "relacion==='mala'"
+        }
+      ]
+    }
+  ]
+}

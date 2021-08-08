@@ -1,0 +1,24 @@
+{
+  "name": "perju-streaming",
+  "version": "1.0.0",
+  "description": "páginas para los overlays del streaming",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Perju",
+  "license": "MIT",
+  "dependencies": {
+    "discord-bot": "Perju/discord-bot",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "nlp-for-bots": "Perju/nlp-for-bots",
+    "obs-websocket-js": "^4.0.3",
+    "socket.io": "^4.1.3",
+    "text2wav": "^0.0.13",
+    "twitch-bot": "Perju/twitch-bot"
+  }
+}

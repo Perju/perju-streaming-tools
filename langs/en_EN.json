@@ -1,0 +1,77 @@
+{
+  "name": "Name of the corpus",
+  "locale": "en-US",
+  "data": [
+    {
+      "intent": "greetings.bye",
+      "utterances": [
+        "goodbye for now",
+        "bye bye take care",
+        "okay see you later",
+        "bye for now",
+        "i must go"
+      ],
+      "answers": [
+        {
+          "answer": ["till next time", "see you soon!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["till next time crack", "see you soon!"],
+          "opts": "relacion==='buena'"
+        },
+        {
+          "answer": ["Bye bye idiot", "What are you waiting for?"],
+          "opts": "relacion==='mala'"
+        }
+      ]
+    },
+    {
+      "intent": "greetings.hello",
+      "utterances": ["hello", "hi", "howdy"],
+      "answers": [
+        {
+          "answer": ["Hey there!", "Greetings!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["Hey there {{nombre}}!", "Greetings {{nombre}}!"],
+          "opts": "relacion==='buena'"
+        },
+        {
+          "answer": ["Hi idiot", "Oh no, another time! :("],
+          "opts": "relacion==='mala'"
+        }
+      ]
+    },
+    {
+      "intent": "greetings.howareyou",
+      "utterances": [
+        "how is your day",
+        "how is your day going",
+        "how are you",
+        "how are you doing",
+        "what about your day",
+        "are you alright"
+      ],
+      "answers": [
+        {
+          "answer": ["Nice, thanks", "I'm fine, thanks"],
+          "opts": "relacion==='neutral'"
+        },{
+          "answer": [
+            "Feeling wonderful!",
+            "Wonderful! Thanks for asking"
+          ],
+          "opts": "relacion==='buena'"
+        },{
+          "answer": [
+            "Fine until you've arrived!",
+            "Oh no not again"
+          ],
+          "opts": "relacion==='mala'"
+        }
+      ]
+    }
+  ]
+}

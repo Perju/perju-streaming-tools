@@ -1,0 +1,48 @@
+* My twitch streaming tools
+** Páginas para el streaming
+
+*** Inicio streaming
+Página con titulo y un mensaje para atraer a los espectadores donde se muestra
+una cuenta atras que indica cuando empezara supuestamente el streaming.
+
+*** Capturar aplicaciones del escritorio
+Un par de cuadros para mostrar la cámara y una aplicación del escritorio,
+dejando espacio por encima y por debajo para mostrar el titulo y algún texto en
+la parte inferior.
+
+*** Capturar juego a pantalla completa
+No es necesario crear página para poder colocar los elementos dependiendo del
+juego, por si molestan o si quiero que molesten.
+
+*** Final stream
+Una página para despedirme de los seguidores.
+
+*** Fondo para el streaming
+Un fondo para mostrar en todas las escenas.
+
+*** Alertas
+Un overlay para mostrar alertas con emoticonos y/o sonido que se reciben desde
+el bot o una página de control.
+
+** Bot para chat y alertas
+
+*** mensajes de chat
+Periódicamente enviá mensajes que se eligen de forma aleatoria, los menajes se
+incluyen en un archivo externo. Si recibe alguna mención directa es capaz de
+contestar gracias al servicio nlp.
+
+* Puesta en marcha
+** .env template
+#+begin_src conf :tangle .env
+# true to use /template folder
+DEMO=true
+
+# Twitch config
+CLIENT_ID=NombreDelBot
+CHANNEL_ID=CanalDelStreamer
+TWITCH_BOT_TOKEN=oauth:TOKEN
+
+# Nlp config
+NLP_URL=http://127.0.0.1/nlp
+TRAIN=true
+#+end_src

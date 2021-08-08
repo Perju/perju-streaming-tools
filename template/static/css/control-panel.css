@@ -1,0 +1,30 @@
+body {
+  background-image: none;
+  overflow: hidden;
+}
+h1 {
+  font-size: 48px;
+}
+#content {
+  position: absolute;
+  display:flex;
+  flex-flow: row;
+}
+.btn-deck {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 150px;
+}
+.btn-row {
+  width: 500px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+button {
+  padding: 4px 12px;
+  border-radius: 4px;
+}
