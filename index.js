@@ -8,6 +8,10 @@ import PGTwitchBot from "twitch-bot";
 import PGDiscordBot from "discord-bot";
 import Nlp from "nlp-for-bots";
 import text2wav from "text2wav";
+import OBSWebSocket from "obs-websocket-js";
+
+// obs-websoket
+const obs = new OBSWebSocket();
 
 // nlp-for-bots
 const nlp = new Nlp({ env: process.env });
@@ -71,8 +75,12 @@ const server = new http.createServer(app);
 let alertSockets = [];
 let controlSockets = [];
 
+obs.connect({ address: "192.168.1.152:4444" }).catch((err) => {
+  console.log(err);
+});
+
 const io = new Server(server);
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log(`Someone has connected`);
 
   socket.on("add", (msg) => {
@@ -85,6 +93,10 @@ io.on("connection", (socket) => {
         break;
       default:
     }
+  });
+
+  socket.on("obs", (data) => {
+    obs.send("SetCurrentScene", { "scene-name": data });
   });
 
   socket.on("message", (msg) => {
@@ -123,15 +135,3 @@ io.on("connection", (socket) => {
 server.listen(process.env.port || 8080, () => {
   console.log(`Server started no port ${server.address().port} :)`);
 });
-
-// test obs-websoket
-import OBSWebSocket from "obs-websocket-js";
-const obs = new OBSWebSocket();
-obs
-  .connect({ address: "192.168.1.152:4444" })
-  .then((data) => {
-    obs.send("SetCurrentScene", { "scene-name": "Cuenta atras" });
-  })
-  .catch((err) => {
-    console.log(err);
-  });

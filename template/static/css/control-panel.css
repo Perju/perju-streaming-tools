@@ -1,10 +1,19 @@
+body, button, span, textarea, select, legend {
+  font-size: 18px;
+}
 body {
   background-image: none;
   overflow: hidden;
 }
 h1 {
   font-size: 48px;
+  margin: 10px 0 4px;
 }
+form {
+  border:solid 1px black;
+  padding: 10px;
+}
+
 #content {
   position: absolute;
   display:flex;
@@ -27,4 +36,15 @@ h1 {
 button {
   padding: 4px 12px;
   border-radius: 4px;
+  width: 100px;
+  height: 75px;
+}
+textarea {
+  display: block;
+  width: 100%;
+  height: 60px;
+  resize: none;
+}
+label {
+  width: 500px;
 }

@@ -3,25 +3,25 @@ const socket = io();
 socket.on("connect", () => {
   socket.emit("add", "control-panel");
 
-  let followBtn = document.querySelector("#follow");
-  let raidBtn = document.querySelector("#raid");
+  let deckBtns = document.querySelectorAll(".obs");
   let happyBtn = document.querySelector("#happy");
-  let startAdvisesBtn = document.querySelector("#start-advises");
-  let stopAdvisesBtn = document.querySelector("#stop-advises");
+  let twitchBotBtns = document.querySelectorAll(".twitch");
   let submitTTS = document.querySelector("#submitTTS");
 
-  followBtn.disabled = false;
-  raidBtn.disabled = false;
+  console.log(deckBtns);
+
+  deckBtns.forEach((btn) => (btn.disabled = false));
   happyBtn.disabled = false;
-  startAdvisesBtn.disabled = false;
-  stopAdvisesBtn.disabled = false;
+  twitchBotBtns.forEach((btn) => (btn.disabled = false));
   submitTTS.querySelector(".submit").disabled = false;
 
   happyBtn.addEventListener("click", alertMsg);
-  raidBtn.addEventListener("click", alertMsg);
-  followBtn.addEventListener("click", alertMsg);
-  startAdvisesBtn.addEventListener("click", twitchBot);
-  stopAdvisesBtn.addEventListener("click", twitchBot);
+  deckBtns.forEach((btn) => {
+    btn.addEventListener("click", obsControl);
+  });
+  twitchBotBtns.forEach((btn) => {
+    btn.addEventListener("click", twitchBot);
+  });
   submitTTS.addEventListener("submit", ttsAlert);
 });
 
@@ -33,12 +33,18 @@ function alertMsg(e) {
   socket.emit("message", e.target.id);
 }
 
+function obsControl(e) {
+  socket.emit("obs", e.target.innerHTML);
+}
+
 function ttsAlert(e) {
   e.preventDefault();
   console.log(e.target.elements);
   let data = {
     msg: e.target.elements.text.value,
-    opts: { voice: e.target.elements.voice.value + e.target.elements.variant.value },
+    opts: {
+      voice: e.target.elements.voice.value + e.target.elements.variant.value,
+    },
   };
   socket.emit("tts", data);
 }
