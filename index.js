@@ -1,4 +1,5 @@
 import path from "path";
+import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
@@ -63,10 +64,18 @@ app.get("/", (req, res) => {
   console.log(Object.keys(req));
   res.render("index");
 });
+
+app.get("/control-panel", (req, res) => {
+  const file = __dirname + "/" + folder + "/deck-config.json";
+  let buttons = JSON.parse(fs.readFileSync(file));
+  res.render("control-panel", buttons);
+});
+
 app.get("/*", (req, res) => {
   console.log(req.originalUrl.slice(1));
   res.render(req.originalUrl.slice(1));
 });
+fs;
 app.use(express.static(staticFolder));
 
 const server = new http.createServer(app);
@@ -96,7 +105,7 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("obs", (data) => {
-    obs.send("SetCurrentScene", { "scene-name": data });
+    obs.send(data.action, { "scene-name": data.value });
   });
 
   socket.on("message", (msg) => {

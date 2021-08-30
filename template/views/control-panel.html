@@ -13,18 +13,16 @@
       <div class="btn-deck">
         <h1>Stream Deck</h1>
         <div class="btn-row">
-          <div>
-            <button class="obs" disabled="true">Cuenta atras</button>
-          </div>
-          <div>
-            <button class="obs" disabled="true">Capturar pantalla</button>
-          </div>
-          <div>
-            <button class="obs" disabled="true">Capturar solo juego</button>
-          </div>
-          <div>
-            <button class="obs" disabled="true">Finalizar</button>
-          </div>
+          <% buttons.forEach( b =>{ %>
+          <button
+            class="obs"
+            disabled="true"
+            value="<%- b.value %>"
+            action="<%- b.action %>"
+          >
+            <%- b.text %>
+          </button>
+          <% }) %>
         </div>
         <h1>Control de las alertas</h1>
         <div class="btn-row">

@@ -1,0 +1,24 @@
+{
+  "buttons": [
+    {
+      "text": "Inicio",
+      "action": "SetCurrentScene",
+      "value": "Cuenta atras"
+    },
+    {
+      "text": "Escritorio",
+      "action": "SetCurrentScene",
+      "value": "Capturar pantalla"
+    },
+    {
+      "text": "Jugar",
+      "action": "SetCurrentScene",
+      "value": "Capturar solo juego"
+    },
+    {
+      "text": "Acabando",
+      "action": "SetCurrentScene",
+      "value": "Finalizar"
+    }
+  ]
+}

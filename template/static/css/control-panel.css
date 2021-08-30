@@ -30,7 +30,7 @@ form {
 .btn-row {
   width: 500px;
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
   justify-content: space-between;
 }
 button {

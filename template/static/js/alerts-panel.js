@@ -34,7 +34,8 @@ function alertMsg(e) {
 }
 
 function obsControl(e) {
-  socket.emit("obs", e.target.innerHTML);
+  let {action, value} = e.target.attributes;
+  socket.emit("obs", { action: action.value, value: value.value });
 }
 
 function ttsAlert(e) {
