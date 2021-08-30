@@ -3,7 +3,9 @@ import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import https from "https";
 import http from "http";
+import cors from "cors";
 import { Server } from "socket.io";
 import PGTwitchBot from "twitch-bot";
 import PGDiscordBot from "discord-bot";
@@ -41,8 +43,12 @@ const staticFolder = path.join(__dirname, folder + "/static");
 let viewsFolder = path.join(__dirname, folder + "/views");
 import ejs from "ejs";
 
+// permite mostrar el chat embebido de twitch
+let privateKey = fs.readFileSync("key.pem");
+let certificate = fs.readFileSync("cert.pem");
+app.use(cors({ origin: false }));
+
 console.log(staticFolder, viewsFolder);
-// app.use(helmet({ frameguard: { action: "allow-from", domain: "http://192.168.1.118:8080" } }));
 
 app.engine(".html", ejs.__express);
 app.set("views", viewsFolder);
@@ -66,19 +72,32 @@ app.get("/", (req, res) => {
 });
 
 app.get("/control-panel", (req, res) => {
+  console.log(Object.keys(res));
+  console.log("Out data:", res._header);
+  res.header("Acces-Control-Allow-Origin", "*");
+  res.header(
+    "Acces-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("X-Frame-Options", "ALLOW-FROM *");
   const file = __dirname + "/" + folder + "/deck-config.json";
-  let buttons = JSON.parse(fs.readFileSync(file));
-  res.render("control-panel", buttons);
+  let jsonData = JSON.parse(fs.readFileSync(file));
+  let buttons = jsonData.buttons;
+  console.log("Holi: ", buttons);
+  res.render("control-panel", {buttons, serverAddress: "192.168.1.118"});
 });
 
 app.get("/*", (req, res) => {
-  console.log(req.originalUrl.slice(1));
-  res.render(req.originalUrl.slice(1));
+  res.render(req.originalUrl.slice(1), {serverAddress: "192.168.1.118"});
 });
 fs;
 app.use(express.static(staticFolder));
 
-const server = new http.createServer(app);
+const server = new https.createServer(
+  { key: privateKey, cert: certificate },
+  app
+);
+const serverHttp = new http.createServer(app);
 
 // socket.io
 let alertSockets = [];
@@ -89,7 +108,11 @@ obs.connect({ address: "192.168.1.152:4444" }).catch((err) => {
 });
 
 const io = new Server(server);
-io.on("connection", async (socket) => {
+io.on("connection", socketIoHandler);
+const ioHttp = new Server(serverHttp);
+ioHttp.on("connection", socketIoHandler);
+
+async function socketIoHandler(socket){
   console.log(`Someone has connected`);
 
   socket.on("add", (msg) => {
@@ -139,8 +162,11 @@ io.on("connection", async (socket) => {
   // socket.on("speech", function (voices) {
   //   console.log("voice 0: ", voices[0], "\nvoices: ", voices);
   // });
-});
+}
 
-server.listen(process.env.port || 8080, () => {
+server.listen(process.env.HTTPS_PORT || 5000, () => {
   console.log(`Server started no port ${server.address().port} :)`);
 });
+serverHttp.listen(process.env.HTTP_PORT || 5001, () => {
+  console.log(`Server started no port ${serverHttp.address().port} :)`);
+})

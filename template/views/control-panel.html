@@ -104,12 +104,12 @@
             <input type="submit" class="submit" value="Leer" disabled="true" />
           </form>
         </div>
-        <a
-          href="https://www.twitch.tv/embed/<%- process.env.CHANNEL_ID %>/chat?parent=www.twitch.tv"
-          target="_blank"
-          >Enlace al chat de la transmisión</a
-        >
       </div>
+      <iframe
+        src="https://www.twitch.tv/embed/<%- process.env.CHANNEL_ID %>/chat?parent=<%- process.env.DOMAIN_PARENT%>"
+        width="50%"
+        height="100%"
+      ></iframe>
     </div>
   </body>
 </html>
