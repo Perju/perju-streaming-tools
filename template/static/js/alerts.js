@@ -19,24 +19,22 @@ socket.on("connect", () => {
 
 socket.on("message", function (msg) {
   if (msg === "happy") {
-    console.log("*****HAPPY*****", msg);
-    let count = 20;
+    let count = 40;
     let timerId = setInterval(function () {
       count--;
       if (count <= 0) clearInterval(timerId);
       let heart = makeHeart();
       dropElement(heart);
-    }, Math.random() * 250 + 250);
+    }, Math.random() * 125 + 125);
   }
   if (msg === "ok") {
-    console.log("*****HAPPY*****", msg);
-    let count = 20;
+    let count = 40;
     let timerId = setInterval(function () {
       count--;
       if (count <= 0) clearInterval(timerId);
       let heart = makeOk();
       dropElement(heart);
-    }, Math.random() * 250 + 250);
+    }, Math.random() * 125 + 125);
   }
 });
 
@@ -65,18 +63,12 @@ function makeElement(nombre, clase) {
 }
 
 function dropElement(el) {
-  el.style.position = "absolute";
-  el.style.left = Math.random() * 1820 + "px";
-  el.style.top = "-100px";
-  content.append(el);
-  let pos = -100;
-  let id = setInterval(() => {
-    if (pos >= 1080) {
-      clearInterval(id);
-      el.parentNode.removeChild(el);
-    } else {
-      pos += 4;
-      el.style.top = `${pos}px`;
-    }
-  }, 40);
+  let drop = makeElement("div", "drop-el");
+  drop.style.left = Math.random() * 1820 + "px";
+  drop.append(el);
+  content.append(drop);
+  let id = setTimeout(() => {
+      clearTimeout(id);
+      drop.parentNode.removeChild(drop);
+  }, 6000);
 }
