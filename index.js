@@ -84,11 +84,11 @@ app.get("/control-panel", (req, res) => {
   let jsonData = JSON.parse(fs.readFileSync(file));
   let buttons = jsonData.buttons;
   console.log("Holi: ", buttons);
-  res.render("control-panel", {buttons, serverAddress: "192.168.1.118"});
+  res.render("control-panel", {buttons, serverAddress: process.env.DOMAIN_PARENT});
 });
 
 app.get("/*", (req, res) => {
-  res.render(req.originalUrl.slice(1), {serverAddress: "192.168.1.118"});
+  res.render(req.originalUrl.slice(1), {serverAddress: process.env.DOMAIN_PARENT});
 });
 fs;
 app.use(express.static(staticFolder));
@@ -132,6 +132,7 @@ async function socketIoHandler(socket){
   });
 
   socket.on("message", (msg) => {
+    // console.log(msg);
     alertSockets.concat(controlSockets).forEach((s) => s.emit("message", msg));
   });
 

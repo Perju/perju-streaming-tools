@@ -4,18 +4,20 @@ socket.on("connect", () => {
   socket.emit("add", "control-panel");
 
   let deckBtns = document.querySelectorAll(".obs");
-  let happyBtn = document.querySelector("#happy");
+  let happyBtn = document.querySelectorAll(".drop");
   let twitchBotBtns = document.querySelectorAll(".twitch");
   let submitTTS = document.querySelector("#submitTTS");
 
-  console.log(deckBtns);
+  // console.log(happyBtn);
 
   deckBtns.forEach((btn) => (btn.disabled = false));
-  happyBtn.disabled = false;
+  happyBtn.forEach((btn) => (btn.disabled = false));
   twitchBotBtns.forEach((btn) => (btn.disabled = false));
   submitTTS.querySelector(".submit").disabled = false;
 
-  happyBtn.addEventListener("click", alertMsg);
+  happyBtn.forEach((btn) => {
+    btn.addEventListener("click", alertMsg);
+  });
   deckBtns.forEach((btn) => {
     btn.addEventListener("click", obsControl);
   });
@@ -30,17 +32,17 @@ function twitchBot(e) {
 }
 
 function alertMsg(e) {
-  socket.emit("message", e.target.id);
+  socket.emit("message", e.target.attributes.value.value);
 }
 
 function obsControl(e) {
-  let {action, value} = e.target.attributes;
+  let { action, value } = e.target.attributes;
   socket.emit("obs", { action: action.value, value: value.value });
 }
 
 function ttsAlert(e) {
   e.preventDefault();
-  console.log(e.target.elements);
+  // console.log(e.target.elements);
   let data = {
     msg: e.target.elements.text.value,
     opts: {

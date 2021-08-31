@@ -1,3 +1,4 @@
+ /* corazon */
 :root {
   --big-heart: scale(1) rotate(45deg);
   --small-heart: scale(0.6) rotate(45deg);
@@ -43,3 +44,11 @@
 }
 .before { top: -25px; }
 .after { left: -25px; }
+/* ok */
+.okIcon {
+  width: 64px;
+  height: 64px;
+  background-image: url("../images/ok.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
