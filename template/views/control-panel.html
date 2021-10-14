@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Perju</title>
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/control-panel.css" rel="stylesheet" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/alerts-panel.js"></script>
-  </head>
+<%- include("../partials/head.html", {styles: ["control-panel.css"], scripts: ["/socket.io/socket.io.js", "/js/alerts-panel.js"]}) %>
   <body>
     <div id="content">
       <div class="btn-deck">
@@ -27,7 +18,9 @@
         <h1>Control de las alertas</h1>
         <div class="btn-row">
           <div>
-            <button class="drop" value="happy" disabled="true">corazones</button>
+            <button class="drop" value="happy" disabled="true">
+              corazones
+            </button>
           </div>
           <div>
             <button class="drop" value="ok" disabled="true">okeys</button>
@@ -51,6 +44,10 @@
               <span>Voz:</span>
               <select id="voiceSelect" name="voice">
                 <option value="es" selected="selected">es - Spanish</option>
+                <option value="spanish-mbrola-1">es mbrola 1</option>
+                <option value="spanish-mbrola-2">es mbrola 2</option>
+                <option value="spanish-mbrola-3">es mbrola 3</option>
+                <option value="spanish-mbrola-4">es mbrola 4</option>
                 <option value="es-419">es-la - Spanish, Latam</option>
                 <option value="en">en - English</option>
                 <option value="en-us">en-us - English, US</option>
@@ -107,11 +104,16 @@
             <input type="submit" class="submit" value="Leer" disabled="true" />
           </form>
         </div>
+        <a
+          href="https://dashboard.twitch.tv/popout/u/<%- process.env.CHANNEL_ID %>/stream-manager/activity-feed"
+          target="_blank"
+          >Ver activity feed</a
+        >
       </div>
       <iframe
         src="https://www.twitch.tv/embed/<%- process.env.CHANNEL_ID %>/chat?parent=<%- process.env.DOMAIN_PARENT%>"
-        width="50%"
         height="100%"
+        width="50%"
       ></iframe>
     </div>
   </body>

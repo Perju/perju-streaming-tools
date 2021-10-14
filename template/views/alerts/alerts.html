@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Perju</title>
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/alerts.css" rel="stylesheet" />
-    <link href="/css/icons.css" rel="stylesheet" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io("http://<%= serverAddress %>", {secure: true, "sync disconnect on unload": true});
-    </script>
-    <script src="/js/alerts.js"></script>
-  </head>
+<%- include("../../partials/head.html", {styles: ["alerts.css", "icons.css"], scripts:["/js/alerts.js"], socket: true}); %>
   <body>
     <div id="content">
     </div>

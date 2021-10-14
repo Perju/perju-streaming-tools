@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Perju</title>
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/countdown.css" rel="stylesheet" />
-    <link href="/css/heart.css" rel="stylesheet" />
-  </head>
+<%- include("../../partials/head.html", {styles: ["final.css", "icons.css"]}); %>
   <body>
     <div class="heart">
       <div class="before"></div>
@@ -14,13 +6,15 @@
       <div class="after"></div>
     </div>
 
-    <div id="content" class="borde-colorido">
-      <div>
-        <h1>¡¡¡ESTAMOS ACABANDO!!!</h1>
-        <div class="message">
-          <h2>HASTA</h2>
-          <hr />
-          <h2>PRONTO</h2>
+    <div id="content">
+      <div class="borde-colorido">
+        <div id="cartel">
+          <h1>¡¡¡ESTAMOS ACABANDO!!!</h1>
+          <div class="message">
+            <h2>HASTA</h2>
+            <hr />
+            <h2>PRONTO</h2>
+          </div>
         </div>
       </div>
     </div>

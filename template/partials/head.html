@@ -2,8 +2,22 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Indice</title>
+    <title>Stream Tools</title>
+    <link href="/css/main.css" rel="stylesheet" />
     <% styles.forEach(function(style){ %>
-      <link href="<%- style %>" rel="stylesheet" />
+    <link href="/css/<%- style %>" rel="stylesheet" />
     <% }); %>
+
+    <% if(typeof socket === "boolean" && socket) { %>
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+        const socket = io("http://<%= serverAddress %>", {secure: true, "sync disconnect on unload": true});
+      </script>
+    <% } %>
+
+    <% if(typeof scripts == "object" && scripts) { %>
+      <% scripts.forEach(function(script){ %>
+        <script src="<%- script %>"></script>
+      <% }); %>
+    <% } %>
   </head>

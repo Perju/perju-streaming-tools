@@ -33,11 +33,14 @@
   --croma-key: #00ff00;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-size: 24px;
   margin: 0;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   background-size:     cover;
