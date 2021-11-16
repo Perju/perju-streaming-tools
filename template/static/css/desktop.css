@@ -16,34 +16,20 @@ h1,
   align-items: center;
   flex-flow: column;
 }
-#principal, #cam, #chat {
+#principal, #chat {
   position: absolute;
 }
 #principal{
   top: 14%;
   left: 2%;
-  width: 60%;
-  height: 60%;
-}
-#principal > div, #cam > div  {
+  width: 58%;
+  height: 58%;
   background-color: var(--croma-key);
 }
-#chat > div {
+#chat  {
   background-color: black;
-}
-
-#cam {
-  left: 3%;
-  top: 2%;
-  width: 43%;
-  height: 25%;
-}
-#chat {
   right: 3%;
   top: 5%;
-  width: 32%;
-  height: 90%;
-}
-.borde-colorido > div {
-  height: 100%;
+  width: 30%;
+  height: 87%;
 }
