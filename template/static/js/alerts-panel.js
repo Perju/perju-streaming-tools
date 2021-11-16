@@ -7,6 +7,7 @@ socket.on("connect", () => {
   let happyBtn = document.querySelectorAll(".drop");
   let twitchBotBtns = document.querySelectorAll(".twitch");
   let submitTTS = document.querySelector("#submitTTS");
+  let collapseBtns = document.querySelectorAll(".btn-row");
 
   // console.log(happyBtn);
 
@@ -23,6 +24,10 @@ socket.on("connect", () => {
   });
   twitchBotBtns.forEach((btn) => {
     btn.addEventListener("click", twitchBot);
+  });
+  collapseBtns.forEach((btn) => {
+    btn.addEventListener("click", collapseRow);
+    btn.style.height = btn.querySelector("form") ? "300px" : "200px";
   });
   submitTTS.addEventListener("submit", ttsAlert);
 });
@@ -50,4 +55,18 @@ function ttsAlert(e) {
     },
   };
   socket.emit("tts", data);
+}
+
+function collapseRow(e) {
+  let { target, currentTarget } = e;
+  if (target.className.startsWith("fas")) {
+    let formulario = currentTarget.querySelector("form");
+    let bigHeight = formulario !== null ? "300px" : "200px";
+    console.log(bigHeight);
+    let style = currentTarget.style;
+    style =
+      style.height !== "70px"
+        ? (style.height = "70px")
+        : (style.height = bigHeight);
+  }
 }

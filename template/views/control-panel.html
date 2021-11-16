@@ -1,9 +1,15 @@
 <%- include("../partials/head.html", {styles: ["control-panel.css"], scripts: ["/socket.io/socket.io.js", "/js/alerts-panel.js"]}) %>
+
   <body>
     <div id="content">
+      <%- include("../partials/menubar.html") %>
+      <h1>Panel de control</h1>
       <div class="btn-deck">
-        <h1>Stream Deck</h1>
         <div class="btn-row">
+          <div class="header">
+            <h1>Stream Deck</h1>
+            <i class="fas fa-bars"></i>
+          </div>
           <% buttons.forEach( b =>{ %>
           <button
             class="obs"
@@ -15,28 +21,30 @@
           </button>
           <% }) %>
         </div>
-        <h1>Control de las alertas</h1>
+
         <div class="btn-row">
-          <div>
+          <div class="header">
+            <h1>Control de las alertas</h1>
+            <i class="fas fa-bars"></i>
+          </div>
             <button class="drop" value="happy" disabled="true">
               corazones
             </button>
-          </div>
-          <div>
             <button class="drop" value="ok" disabled="true">okeys</button>
-          </div>
         </div>
-        <h1>Control bot Twitch</h1>
         <div class="btn-row">
-          <div>
+          <div class="header">
+            <h1>Control bot Twitch</h1>
+            <i class="fas fa-bars"></i>
+          </div>
             <button class="twitch" disabled="true">Start advises</button>
-          </div>
-          <div>
             <button class="twitch" disabled="true">Stop advises</button>
-          </div>
         </div>
-        <h1>Controles de Texto a voz</h1>
         <div class="btn-row">
+          <div class="header">
+            <h1>Controles de Texto a voz</h1>
+            <i class="fas fa-bars"></i>
+          </div>
           <form id="submitTTS">
             <legend>Texto a voz</legend>
             <textarea name="text">Nunca te rindas</textarea>
@@ -76,6 +84,7 @@
                 <option value="yue">Cantonese Chinese</option>
               </select>
             </label>
+            <br/>
             <span>Variante:</span>
             <select id="variantSelect" name="variant">
               <option value="" selected>None</option>
@@ -104,17 +113,20 @@
             <input type="submit" class="submit" value="Leer" disabled="true" />
           </form>
         </div>
-        <a
-          href="https://dashboard.twitch.tv/popout/u/<%- process.env.CHANNEL_ID %>/stream-manager/activity-feed"
-          target="_blank"
-          >Ver activity feed</a
-        >
+        <div class="btn-row">
+          <div class="header">
+            <h1>Enlaces externos</h1>
+            <i class="fas fa-bars"></i>
+          </div>
+          <a
+            href="https://dashboard.twitch.tv/popout/u/<%- process.env.CHANNEL_ID %>/stream-manager/activity-feed"
+            target="_blank">Ver activity feed
+          </a>
+          <a
+            href="https://www.twitch.tv/popout/<%- process.env.CHANNEL_ID %>/chat?popout="
+            target="_blank">Chat popout
+          </a>
       </div>
-      <iframe
-        src="https://www.twitch.tv/embed/<%- process.env.CHANNEL_ID %>/chat?parent=<%- process.env.DOMAIN_PARENT%>"
-        height="100%"
-        width="50%"
-      ></iframe>
     </div>
   </body>
 </html>
