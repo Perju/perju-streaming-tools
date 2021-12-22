@@ -103,9 +103,7 @@ const serverHttp = new http.createServer(app);
 let alertSockets = [];
 let controlSockets = [];
 
-obs.connect({ address: "192.168.1.152:4444" }).catch((err) => {
-  console.log(err);
-});
+
 
 const io = new Server(server);
 io.on("connection", socketIoHandler);
@@ -128,7 +126,15 @@ async function socketIoHandler(socket){
   });
 
   socket.on("obs", (data) => {
-    obs.send(data.action, { "scene-name": data.value });
+    if(data.action === "connect" ){
+      obs.connect({ address: "192.168.1.152:4444" }).catch((err) => {
+        console.log(err);
+      });
+    } else {
+      obs.send(data.action, { "scene-name": data.value }).catch((err)=>{
+        console.log(err);
+      });
+    }
   });
 
   socket.on("message", (msg) => {

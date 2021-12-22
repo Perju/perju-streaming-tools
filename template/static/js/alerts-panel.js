@@ -25,12 +25,15 @@ socket.on("connect", () => {
   twitchBotBtns.forEach((btn) => {
     btn.addEventListener("click", twitchBot);
   });
-  collapseBtns.forEach((btn) => {
-    btn.addEventListener("click", collapseRow);
-    btn.style.height = btn.querySelector("form") ? "300px" : "200px";
-  });
+  collapseBtns.forEach((grp) => {
+    grp.addEventListener("click", collapseRow);
+    grp.style.height = calcHeight(grp)});
   submitTTS.addEventListener("submit", ttsAlert);
 });
+
+function calcHeight(el) {
+  return el.querySelector("form") ? "300px" : "200px";
+}
 
 function twitchBot(e) {
   socket.emit("twitch-bot", e.target.id);
@@ -60,8 +63,7 @@ function ttsAlert(e) {
 function collapseRow(e) {
   let { target, currentTarget } = e;
   if (target.className.startsWith("fas")) {
-    let formulario = currentTarget.querySelector("form");
-    let bigHeight = formulario !== null ? "300px" : "200px";
+    let bigHeight = calcHeight(currentTarget);
     console.log(bigHeight);
     let style = currentTarget.style;
     style =

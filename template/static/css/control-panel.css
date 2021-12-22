@@ -3,11 +3,11 @@ body, button, span, textarea, select, legend {
 }
 body {
   background-image: none;
-  overflow: hidden;
+  background-color: var(--bg-semi-light);
 }
 h1 {
   font-size: 32px;
-  margin: 32px 0 12px;
+  margin: 0;
 }
 form {
   width: 92%;
@@ -49,17 +49,33 @@ form input.submit {
   transition: height 1s ease;
 }
 .btn-row > .header {
-  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: min-content;
   background-color: var(--cmpl-3);
 }
-.btn-row > .header, h1 {
-  display: inline;
-}
 .btn-row > .header, i {
-  float: right;
   padding: 16px;
+}
+.btn-row > .header input {
+  padding: 4px 8px !important;
+  height: min-content;
+}
+.btn-row > .header button {
+  background-color: var(--bg-semi-light);
+  padding: 2px 4px;
+  width: 120px;
+  height: 36px;
+  border-radius: 6px;
+  border: solid 6px var(--bg-semi-dark);
+  transition: border .3s ease-in;
+  margin: 16px;
+}
+.btn-row > .header button:active {
+  border: solid 0 transparent;
+  transition: border .3s ease-out;
 }
 
 button {
