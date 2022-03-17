@@ -15,6 +15,7 @@ import OBSWebSocket from "obs-websocket-js";
 
 // obs-websoket
 const obs = new OBSWebSocket();
+let obsScenes;
 
 // nlp-for-bots
 const nlp = new Nlp({ env: process.env });
@@ -84,13 +85,19 @@ app.get("/control-panel", (req, res) => {
   let jsonData = JSON.parse(fs.readFileSync(file));
   let buttons = jsonData.buttons;
   console.log("Holi: ", buttons);
-  res.render("control-panel", {buttons, serverAddress: process.env.DOMAIN_PARENT});
+  res.render("control-panel", {
+    buttons,
+    serverAddress: process.env.DOMAIN_PARENT,
+  });
 });
 
 app.get("/*", (req, res) => {
-  res.render(req.originalUrl.slice(1), {serverAddress: process.env.DOMAIN_PARENT});
+	console.log(req.originalUrl.slice(1));
+  res.render(
+    req.originalUrl.slice(1)
+  );
 });
-fs;
+
 app.use(express.static(staticFolder));
 
 const server = new https.createServer(
@@ -103,14 +110,12 @@ const serverHttp = new http.createServer(app);
 let alertSockets = [];
 let controlSockets = [];
 
-
-
 const io = new Server(server);
 io.on("connection", socketIoHandler);
 const ioHttp = new Server(serverHttp);
 ioHttp.on("connection", socketIoHandler);
 
-async function socketIoHandler(socket){
+async function socketIoHandler(socket) {
   console.log(`Someone has connected`);
 
   socket.on("add", (msg) => {
@@ -126,12 +131,22 @@ async function socketIoHandler(socket){
   });
 
   socket.on("obs", (data) => {
-    if(data.action === "connect" ){
-      obs.connect({ address: "192.168.1.152:4444" }).catch((err) => {
-        console.log(err);
-      });
+    if (data.action === "connect") {
+      obs
+        .connect({ address: data.value })
+        .then(() => {
+          let scenes = getScenes(obs);
+          scenes.then((el) => {
+            socket.emit("scenes", JSON.stringify(el));
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (data.action === "GetSceneList"){
+      socket.send("GetSceneList", data)
     } else {
-      obs.send(data.action, { "scene-name": data.value }).catch((err)=>{
+      obs.send(data.action, { "scene-name": data.value }).catch((err) => {
         console.log(err);
       });
     }
@@ -171,9 +186,13 @@ async function socketIoHandler(socket){
   // });
 }
 
+function getScenes(obs) {
+  return obs.send("GetSceneList");
+}
+
 server.listen(process.env.HTTPS_PORT || 5000, () => {
   console.log(`Server started no port ${server.address().port} :)`);
 });
 serverHttp.listen(process.env.HTTP_PORT || 5001, () => {
   console.log(`Server started no port ${serverHttp.address().port} :)`);
-})
+});

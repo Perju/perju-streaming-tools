@@ -2,6 +2,8 @@ body {
   background-image: url("../images/background.png");
 }
 h1 {
+  top: 2%;
+  left: 28.5%;
   font-size: 48px;
 }
 h1,
@@ -16,20 +18,21 @@ h1,
   align-items: center;
   flex-flow: column;
 }
-#principal, #chat {
+#principal, #chat, h1 {
   position: absolute;
 }
 #principal{
   top: 14%;
-  left: 2%;
-  width: 58%;
-  height: 58%;
+  left: 0.9%;
+  width: 65%;
+  height: 65%;
   background-color: var(--croma-key);
 }
 #chat  {
   background-color: black;
-  right: 3%;
-  top: 5%;
+  border-radius: 0;
+  right: 0;
+  bottom: 0;
   width: 30%;
-  height: 87%;
+  height: 97%;
 }

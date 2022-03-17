@@ -11,7 +11,7 @@
     <% if(typeof socket === "boolean" && socket) { %>
       <script src="/socket.io/socket.io.js"></script>
       <script>
-        const socket = io("http://<%= serverAddress %>", {secure: true, "sync disconnect on unload": true});
+        const socket = io();
       </script>
     <% } %>
 

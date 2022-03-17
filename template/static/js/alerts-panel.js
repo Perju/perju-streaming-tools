@@ -8,7 +8,8 @@ socket.on("connect", () => {
   let twitchBotBtns = document.querySelectorAll(".twitch");
   let submitTTS = document.querySelector("#submitTTS");
   let collapseBtns = document.querySelectorAll(".btn-row");
-
+  let connectBtn = document.querySelector(".connect");
+  let obsScenes = document.querySelector("#obs-scenes");
   // console.log(happyBtn);
 
   deckBtns.forEach((btn) => (btn.disabled = false));
@@ -27,9 +28,20 @@ socket.on("connect", () => {
   });
   collapseBtns.forEach((grp) => {
     grp.addEventListener("click", collapseRow);
-    grp.style.height = calcHeight(grp)});
+    grp.style.height = calcHeight(grp);
+  });
+
   submitTTS.addEventListener("submit", ttsAlert);
+  connectBtn.addEventListener("click", connectObs);
+
+  socket.on("scenes", (data) => {
+    console.log(JSON.parse(data));
+  });
 });
+
+function createSceneElement(scn) {
+  let elem = document.createElement("div");
+}
 
 function calcHeight(el) {
   return el.querySelector("form") ? "300px" : "200px";
@@ -71,4 +83,14 @@ function collapseRow(e) {
         ? (style.height = "70px")
         : (style.height = bigHeight);
   }
+}
+
+function connectObs(e) {
+  e.preventDefault();
+  let inputField = document.querySelector("#obs-dir");
+  socket.emit("obs", { action: "connect", value: inputField.value });
+}
+
+function getScenes() {
+  return socket.emit("obs");
 }
