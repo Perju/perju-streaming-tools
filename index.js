@@ -11,7 +11,9 @@ import PGTwitchBot from "twitch-bot";
 import PGDiscordBot from "discord-bot";
 import Nlp from "nlp-for-bots";
 import text2wav from "text2wav";
-import OBSWebSocket from "obs-websocket-js";
+//const { OBSWebSocket } = require ("@duncte123/obs-websocket-js");
+import {OBSWebSocket } from "@duncte123/obs-websocket-js";
+
 
 // obs-websoket
 const obs = new OBSWebSocket();
@@ -92,7 +94,7 @@ app.get("/control-panel", (req, res) => {
 });
 
 app.get("/*", (req, res) => {
-	console.log(req.originalUrl.slice(1));
+	// console.log(req.originalUrl.slice(1));
   res.render(
     req.originalUrl.slice(1)
   );
@@ -131,9 +133,11 @@ async function socketIoHandler(socket) {
   });
 
   socket.on("obs", (data) => {
+    console.log(data);
+    if (data === undefined) return;
     if (data.action === "connect") {
       obs
-        .connect({ address: data.value })
+        .connect({address: data.value})
         .then(() => {
           let scenes = getScenes(obs);
           scenes.then((el) => {
@@ -143,10 +147,9 @@ async function socketIoHandler(socket) {
         .catch((err) => {
           console.log(err);
         });
-    } else if (data.action === "GetSceneList"){
-      socket.send("GetSceneList", data)
     } else {
-      obs.send(data.action, { "scene-name": data.value }).catch((err) => {
+      console.log(data.action, data);
+      obs.send(data.action, data).catch((err) => {
         console.log(err);
       });
     }

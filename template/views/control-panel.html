@@ -8,23 +8,13 @@
         <div class="btn-row">
           <div class="header">
             <h1>Stream Deck</h1>
-            <input id="obs-dir" name="direccion" type="text" value="192.168.1.x"/>
+            <div><i class="fas fa-bars"></i></div>
+            <br/>
+            <div class="break"></div>
+            <input id="obs-dir" name="direccion" type="text" value="192.168.1.x:4444"/>
             <button class="connect">Conectar</button>
-            <i class="fas fa-bars"></i>
           </div>
-          <div id="obs-scenes">
-            
-          </div>
-          <% buttons.forEach( b =>{ %>
-          <button
-            class="obs"
-            disabled="true"
-            value="<%- b.value %>"
-            action="<%- b.action %>"
-          >
-            <%- b.text %>
-          </button>
-          <% }) %>
+          <div id="obs-scenes" class="content"></div>
         </div>
 
         <div class="btn-row">
@@ -32,91 +22,97 @@
             <h1>Control de las alertas</h1>
             <i class="fas fa-bars"></i>
           </div>
+          <div class="content">
             <button class="drop" value="happy" disabled="true">
               corazones
             </button>
             <button class="drop" value="ok" disabled="true">okeys</button>
+          </div>
         </div>
         <div class="btn-row">
           <div class="header">
             <h1>Control bot Twitch</h1>
             <i class="fas fa-bars"></i>
           </div>
+          <div class="content">
             <button class="twitch" disabled="true">Start advises</button>
             <button class="twitch" disabled="true">Stop advises</button>
+          </div>
         </div>
         <div class="btn-row">
           <div class="header">
             <h1>Controles de Texto a voz</h1>
             <i class="fas fa-bars"></i>
           </div>
-          <form id="submitTTS">
-            <legend>Texto a voz</legend>
-            <textarea name="text">Nunca te rindas</textarea>
-            <label for="voiceSelect">
-              <span>Voz:</span>
-              <select id="voiceSelect" name="voice">
-                <option value="es" selected="selected">es - Spanish</option>
-                <option value="spanish-mbrola-1">es mbrola 1</option>
-                <option value="spanish-mbrola-2">es mbrola 2</option>
-                <option value="spanish-mbrola-3">es mbrola 3</option>
-                <option value="spanish-mbrola-4">es mbrola 4</option>
-                <option value="es-419">es-la - Spanish, Latam</option>
-                <option value="en">en - English</option>
-                <option value="en-us">en-us - English, US</option>
-                <option value="en-gb-scotland">English, Scottish</option>
-                <option value="ca">Catalan</option>
-                <option value="cs">Czech</option>
-                <option value="de">German</option>
-                <option value="el">Greek</option>
-                <option value="eo">Esperanto</option>
-                <option value="fi">Finnish</option>
-                <option value="fr">French</option>
-                <option value="hu">Hungarian</option>
-                <option value="it">Italian</option>
-                <option value="kn">Kannada</option>
-                <option value="la">Latin</option>
-                <option value="lv">Latvian</option>
-                <option value="nl">Dutch</option>
-                <option value="pl">Polish</option>
-                <option value="pt">Portuguese, Eu</option>
-                <option value="pt-br">Portuguese, Br</option>
-                <option value="ro">Romanian</option>
-                <option value="sk">Slovak</option>
-                <option value="sv">Swedish</option>
-                <option value="tr">Turkish</option>
-                <option value="zh">Mandarin (Pinyin)</option>
-                <option value="yue">Cantonese Chinese</option>
+          <div class="content">
+            <form id="submitTTS">
+              <legend>Texto a voz</legend>
+              <textarea name="text">Nunca te rindas</textarea>
+              <label for="voiceSelect">
+                <span>Voz:</span>
+                <select id="voiceSelect" name="voice">
+                  <option value="es" selected="selected">es - Spanish</option>
+                  <option value="spanish-mbrola-1">es mbrola 1</option>
+                  <option value="spanish-mbrola-2">es mbrola 2</option>
+                  <option value="spanish-mbrola-3">es mbrola 3</option>
+                  <option value="spanish-mbrola-4">es mbrola 4</option>
+                  <option value="es-419">es-la - Spanish, Latam</option>
+                  <option value="en">en - English</option>
+                  <option value="en-us">en-us - English, US</option>
+                  <option value="en-gb-scotland">English, Scottish</option>
+                  <option value="ca">Catalan</option>
+                  <option value="cs">Czech</option>
+                  <option value="de">German</option>
+                  <option value="el">Greek</option>
+                  <option value="eo">Esperanto</option>
+                  <option value="fi">Finnish</option>
+                  <option value="fr">French</option>
+                  <option value="hu">Hungarian</option>
+                  <option value="it">Italian</option>
+                  <option value="kn">Kannada</option>
+                  <option value="la">Latin</option>
+                  <option value="lv">Latvian</option>
+                  <option value="nl">Dutch</option>
+                  <option value="pl">Polish</option>
+                  <option value="pt">Portuguese, Eu</option>
+                  <option value="pt-br">Portuguese, Br</option>
+                  <option value="ro">Romanian</option>
+                  <option value="sk">Slovak</option>
+                  <option value="sv">Swedish</option>
+                  <option value="tr">Turkish</option>
+                  <option value="zh">Mandarin (Pinyin)</option>
+                  <option value="yue">Cantonese Chinese</option>
+                </select>
+              </label>
+              <br/>
+              <span>Variante:</span>
+              <select id="variantSelect" name="variant">
+                <option value="" selected>None</option>
+                <option value="+zac">niño zac</option>
+                <option value="+croak">croak</option>
+                <option value="+klatt">klatt</option>
+                <option value="+klatt2">klatt2</option>
+                <option value="+klatt3">klatt3</option>
+                <option value="+whisper">Susurro</option>
+                <option value="+whisperf">Susurro Fem</option>
+                <option value="+f1">Femenino 1</option>
+                <option value="+f2">Femenino 2</option>
+                <option value="+f3">Femenino 3</option>
+                <option value="+f4">Femenino 4</option>
+                <option value="+f5">Femenino 5</option>
+                <option value="+m1">Masculino 1</option>
+                <option value="+m2">Masculino 2</option>
+                <option value="+m3">Masculino 3</option>
+                <option value="+m4">Masculino 4</option>
+                <option value="+m5">Masculino 5</option>
+                <option value="+m6">Masculino 6</option>
+                <option value="+m7">Masculino 7</option>
+                <option value="+Andy">Andy</option>
+                <option value="+Jacky">Jacky</option>
               </select>
-            </label>
-            <br/>
-            <span>Variante:</span>
-            <select id="variantSelect" name="variant">
-              <option value="" selected>None</option>
-              <option value="+zac">niño zac</option>
-              <option value="+croak">croak</option>
-              <option value="+klatt">klatt</option>
-              <option value="+klatt2">klatt2</option>
-              <option value="+klatt3">klatt3</option>
-              <option value="+whisper">Susurro</option>
-              <option value="+whisperf">Susurro Fem</option>
-              <option value="+f1">Femenino 1</option>
-              <option value="+f2">Femenino 2</option>
-              <option value="+f3">Femenino 3</option>
-              <option value="+f4">Femenino 4</option>
-              <option value="+f5">Femenino 5</option>
-              <option value="+m1">Masculino 1</option>
-              <option value="+m2">Masculino 2</option>
-              <option value="+m3">Masculino 3</option>
-              <option value="+m4">Masculino 4</option>
-              <option value="+m5">Masculino 5</option>
-              <option value="+m6">Masculino 6</option>
-              <option value="+m7">Masculino 7</option>
-              <option value="+Andy">Andy</option>
-              <option value="+Jacky">Jacky</option>
-            </select>
-            <input type="submit" class="submit" value="Leer" disabled="true" />
-          </form>
+              <input type="submit" class="submit" value="Leer" disabled="true" />
+            </form>
+          </div>
         </div>
         <div class="btn-row">
           <div class="header">
